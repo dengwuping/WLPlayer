@@ -8,7 +8,6 @@
 
 #import "WLPlayerController.h"
 #import "WLPlayerView.h"
-#import "AppDelegate.h"
 
 @interface WLPlayerController ()<WLPlayerViewDelegate>
 //播放视图
@@ -19,6 +18,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (self.navigationController) {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.navigationController) {
+        [self.navigationController setNavigationBarHidden:NO];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,22 +35,41 @@
     }];
     [self setupDelegateAction];
     [self.playerView autoPlayTheVideo];
-    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeRight) forKey:@"orientation"];
+    if (self.navigationController) {
+        [self makeLandscapeWithPush];
+    }
 }
+
 //设置代理事件
 - (void)setupDelegateAction {
     @weakify(self);
     [[self rac_signalForSelector:@selector(wl_playerView:triggerBackAction:) fromProtocol:@protocol(WLPlayerViewDelegate)] subscribeNext:^(id x) {
         @strongify(self);
-         [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.navigationController) {
+            [self makePortraitWithPush];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }];
     [[self rac_signalForSelector:@selector(wl_plaerView:currentPlayTime:totalTime:) fromProtocol:@protocol(WLPlayerViewDelegate)] subscribeNext:^(RACTuple *tuple) {
         NSLog(@"当前播放时间： %ld,  播放总时间： %ld ",[tuple[1] longValue],[tuple[2] longValue]);
     }];
     [[self rac_signalForSelector:@selector(wl_playerView:triggerFullScreenAction:) fromProtocol:@protocol(WLPlayerViewDelegate)] subscribeNext:^(RACTuple *tuple) {
+        @strongify(self);
         BOOL fullScreen = [tuple.last boolValue];
         if (fullScreen) {
+            if (self.navigationController) {
+                [self makeLandscapeWithPush];
+            }else {
+                [self makeLandscapeWithPresent];
+            }
         }else {
+            if (self.navigationController) {
+                [self makePortraitWithPush];
+            }else {
+                [self makePortraitWithPresent];
+            }
         }
     }];
     [[self rac_signalForSelector:@selector(wl_playerView:triggerPlayAction:) fromProtocol:@protocol(WLPlayerViewDelegate)] subscribeNext:^(RACTuple *tuple) {
@@ -64,7 +91,7 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return YES;
+    return NO;
 }
 
 - (void)dealloc {

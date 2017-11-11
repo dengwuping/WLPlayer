@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WLBaseController.h"
 
-@interface WLPlayerController : WLBaseController
+@interface WLPlayerController : UIViewController
 
 @end

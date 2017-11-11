@@ -9,7 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <Masonry/Masonry.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-//#import "UIViewController+WLRotation.h"
+#import "UIViewController+WLOrientation.h"
 
 #define WLWeak  __weak typeof(self) weakSelf = self
 

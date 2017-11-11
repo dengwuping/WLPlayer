@@ -47,11 +47,11 @@
         make.left.equalTo(self).offset(20);
         make.height.with.equalTo(@40);
     }];
-//    [self.fullScreenBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.mas_centerY);
-//        make.right.equalTo(self).offset(-20);
-//        make.height.and.with.equalTo(@40);
-//    }];
+    [self.fullScreenBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.right.equalTo(self).offset(-20);
+        make.height.and.with.equalTo(@40);
+    }];
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.left.equalTo(self.playPauseBtn.mas_right).offset(10);
@@ -59,7 +59,7 @@
     }];
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.right.equalTo(self.mas_right).offset(-20);
+        make.right.equalTo(self.fullScreenBtn.mas_left).offset(-10);
         make.width.equalTo(@40);
     }];
     [self.cacheProgress mas_makeConstraints:^(MASConstraintMaker *make) {

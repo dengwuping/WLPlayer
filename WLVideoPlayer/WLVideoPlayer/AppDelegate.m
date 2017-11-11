@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "WLTabBarController.h"
+#import "WLNavigationController.h"
+#import "ViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -19,7 +21,7 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[WLTabBarController alloc] init];;
+    self.window.rootViewController = [[WLTabBarController alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -70,20 +70,4 @@
     return _pushButton;
 }
 
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-//    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
-//}
-//
-//- (BOOL)shouldAutorotate {
-//    return YES;
-//}
-//
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskPortrait;
-//}
-//
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//    return UIInterfaceOrientationPortrait;
-//}
-
 @end

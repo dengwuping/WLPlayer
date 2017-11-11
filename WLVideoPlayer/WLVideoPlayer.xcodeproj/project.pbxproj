@@ -22,6 +22,7 @@
 		33C6746E1FB58605006E86F9 /* WLPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C6746D1FB58605006E86F9 /* WLPlayerController.m */; };
 		33C674711FB58871006E86F9 /* WLTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C674701FB58871006E86F9 /* WLTabBarController.m */; };
 		33C674771FB6A1B9006E86F9 /* WLBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C674761FB6A1B9006E86F9 /* WLBaseController.m */; };
+		33C6747A1FB6AD5F006E86F9 /* UIViewController+WLOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C674791FB6AD5F006E86F9 /* UIViewController+WLOrientation.m */; };
 		DC321D00DDA66251C5446573 /* libPods-WLVideoPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E3152A57C692DC5967D9C6 /* libPods-WLVideoPlayer.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,8 @@
 		33C674701FB58871006E86F9 /* WLTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLTabBarController.m; sourceTree = "<group>"; };
 		33C674751FB6A1B9006E86F9 /* WLBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLBaseController.h; sourceTree = "<group>"; };
 		33C674761FB6A1B9006E86F9 /* WLBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLBaseController.m; sourceTree = "<group>"; };
+		33C674781FB6AD5F006E86F9 /* UIViewController+WLOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WLOrientation.h"; sourceTree = "<group>"; };
+		33C674791FB6AD5F006E86F9 /* UIViewController+WLOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WLOrientation.m"; sourceTree = "<group>"; };
 		50211282370019604EA1FF86 /* Pods-WLVideoPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WLVideoPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-WLVideoPlayer/Pods-WLVideoPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		77E3152A57C692DC5967D9C6 /* libPods-WLVideoPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WLVideoPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E823DD9793ED2A4CFCA6178D /* Pods-WLVideoPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WLVideoPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WLVideoPlayer/Pods-WLVideoPlayer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				33C6745E1FB445AE006E86F9 /* WLTopControlView.m */,
 				33C674601FB445BB006E86F9 /* WLBottomControlView.h */,
 				33C674611FB445BB006E86F9 /* WLBottomControlView.m */,
+				33C674781FB6AD5F006E86F9 /* UIViewController+WLOrientation.h */,
+				33C674791FB6AD5F006E86F9 /* UIViewController+WLOrientation.m */,
 			);
 			path = WLPlayer;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				33C6745F1FB445AE006E86F9 /* WLTopControlView.m in Sources */,
 				33C674681FB58262006E86F9 /* WLNavigationController.m in Sources */,
 				33C6746E1FB58605006E86F9 /* WLPlayerController.m in Sources */,
+				33C6747A1FB6AD5F006E86F9 /* UIViewController+WLOrientation.m in Sources */,
 				33710EAA1FAC5F4100ED35C2 /* ViewController.m in Sources */,
 				33C6745C1FB4457F006E86F9 /* WLPlayerControlView.m in Sources */,
 				33C674621FB445BB006E86F9 /* WLBottomControlView.m in Sources */,
