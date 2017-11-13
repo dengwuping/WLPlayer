@@ -29,5 +29,7 @@
 #define wl_openLandscapeNotificationName @"OpenLandscapeNotification"
 //快进操作
 #define wl_skipPlayTimeNotificationName @"SkipPlayTimeNotification"
+//改变亮度操作
+#define wl_changeBrightnessNotificationName @"ChangeBrightnessNotification"
 
 #define wl_navigationBarHeight [UIScreen mainScreen].bounds.size.height == 812 ? 88 : 64

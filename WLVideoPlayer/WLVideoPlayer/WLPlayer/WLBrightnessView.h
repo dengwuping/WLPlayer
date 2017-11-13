@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WLPlayerHeader.h"
 
 @interface WLBrightnessView : UIView
++ (instancetype)sharedInstance;
 
 @end

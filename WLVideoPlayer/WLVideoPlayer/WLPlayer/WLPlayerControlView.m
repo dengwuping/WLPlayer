@@ -50,6 +50,7 @@
         make.width.equalTo(@125);
         make.height.equalTo(@80);
     }];
+    
 }
 //添加通知
 - (void)addNotificationToSelf {

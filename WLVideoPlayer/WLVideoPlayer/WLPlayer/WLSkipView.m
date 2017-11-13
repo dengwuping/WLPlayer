@@ -77,6 +77,10 @@
         self.hidden = YES;
     }];
 }
+- (void)dealloc {
+    [self hideSkipeView];
+    [self.skipSubject rac_deallocDisposable];
+}
 
 -(RACReplaySubject *)skipSubject{
     if (!_skipSubject){

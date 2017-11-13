@@ -9,6 +9,7 @@
 #import "WLPlayerView.h"
 #import "WLPlayerControlView.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "WLBrightnessView.h"
 
 @interface WLPlayerView ()<WLPlayerControlViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) AVURLAsset *urlAsset;
@@ -65,6 +66,11 @@
 - (void)makeSubviewsConstraints {
     [self.playerControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
+    }];
+    [self addSubview:[WLBrightnessView sharedInstance]];
+    [[WLBrightnessView sharedInstance] mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.width.and.height.equalTo(@140);
     }];
 }
 
@@ -262,7 +268,7 @@
                     break;
                     case WLPanDirectionVertical:
                     //竖直移动
-                    
+                    [self panGestureMovedToVertical:veloctyPoint.y];
                     break;
                 default:
                     break;
@@ -281,7 +287,7 @@
                     case WLPanDirectionVertical:
                 {
                     //垂直移动
-                    [self panGestureMovedToVertical:veloctyPoint.y];
+                    self.isChangingVolume = NO;
                 }
                     break;
                 default:
@@ -318,7 +324,12 @@
 }
 //竖直移动
 - (void)panGestureMovedToVertical:(CGFloat)value {
-    self.isChangingVolume ? (self.volumeSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 10000);
+    if (!self.isChangingVolume) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:wl_changeBrightnessNotificationName object:nil];
+    }else {
+        [WLBrightnessView sharedInstance].alpha = 0.0;
+    }
+    self.isChangingVolume ? (self.volumeSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 1000);
 }
 
 #pragma mark - UIGestureRecognizerDelegate
