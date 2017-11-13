@@ -30,6 +30,10 @@ typedef enum : NSUInteger {
     WLPlayerStateFailed//播放失败
 } WLPlayerState;
 
+typedef enum : NSUInteger {
+    WLPanDirectionHorizontal,//水平移动
+    WLPanDirectionVertical//竖直移动
+} WLPanDirection;
 
 @interface WLPlayerView : UIView
 

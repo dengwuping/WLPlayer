@@ -23,6 +23,8 @@
 @property (nonatomic,strong) UITapGestureRecognizer *singleGesture;
 //双击手势
 @property (nonatomic,strong) UITapGestureRecognizer *doubleGesture;
+//拖动手势
+@property (nonatomic,strong) UIPanGestureRecognizer *panGesture;
 //标识是否正在播放
 @property (nonatomic,assign) BOOL isPlaying;//这个是为了双击手势下暂停或者播放视频用
 //标识播放是否结束
@@ -31,6 +33,12 @@
 @property (nonatomic,strong) id timeObserver;
 //记录播放进度条上次的值
 @property (nonatomic,assign) float sliderLastValue;
+//快进的总时长
+@property (nonatomic,assign) CGFloat skipTotalTime;
+//移动的方向
+@property (nonatomic,assign) WLPanDirection panDirection;
+//标识是否正在屏幕上滑动
+@property (nonatomic,assign) BOOL isDragging;
 @end
 
 @implementation WLPlayerView
@@ -204,6 +212,90 @@
         [self.playerViewDelegate wl_playerView:self triggerPlayAction:self.isPlaying];
     }
 }
+- (void)panGesture:(UIPanGestureRecognizer *)gesture {
+    CGPoint locationPoint = [gesture locationInView:self];
+    CGPoint veloctyPoint = [gesture velocityInView:self];
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan://开始移动
+        {
+            CGFloat x = fabs(veloctyPoint.x);
+            CGFloat y = fabs(veloctyPoint.y);
+            if (x > y) {//水平移动
+                self.panDirection = WLPanDirectionHorizontal;
+                CMTime time = self.player.currentTime;
+                self.skipTotalTime = time.value / time.timescale;
+            }else if (x < y) {//垂直移动
+                self.panDirection = WLPanDirectionVertical;
+                if (locationPoint.x > self.bounds.size.width * 0.5) {
+                    //右半屏控制声音
+                    
+                }else {
+                    //左半屏控制亮度
+                    
+                }
+            }
+        }
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+            switch (self.panDirection) {
+                case WLPanDirectionHorizontal:
+                    //水平移动
+                    [self panGestureMovedToHorizontal:veloctyPoint.x];
+                    break;
+                    case WLPanDirectionVertical:
+                    //竖直移动
+                    
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+            switch (self.panDirection) {
+                case WLPanDirectionHorizontal:
+                    //水平移动
+                    self.isPlaying = YES;
+                    [self seekToTime:self.skipTotalTime];
+                    self.skipTotalTime = 0;
+                    break;
+                    case WLPanDirectionVertical:
+                {
+                    //垂直移动
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+//水平移动
+- (void)panGestureMovedToHorizontal:(CGFloat)value {
+    //每次需要快进的时间
+    self.skipTotalTime += value / 200;
+    CMTime totalTime = self.playerItem.duration;
+    CGFloat totalMovieDuration = (CGFloat)totalTime.value / totalTime.timescale;
+    if (self.skipTotalTime > totalMovieDuration) {
+        self.skipTotalTime = totalMovieDuration;
+    }
+    if (self.skipTotalTime < 0) {
+        self.skipTotalTime = 0;
+    }
+    if (value == 0) {
+        return;
+    }
+    self.isDragging = YES;
+    //改变进度条的值
+    CGFloat progressValue = self.skipTotalTime / totalMovieDuration;
+     [[NSNotificationCenter defaultCenter] postNotificationName:wl_getCurrentPlayTimeNotificationName object:self.playerControl userInfo:@{@"currentTime":@(self.skipTotalTime),@"totalTime":@(totalMovieDuration),@"value":@(progressValue)}];
+}
 
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -218,6 +310,15 @@
         if ([keyPath isEqualToString:@"status"]) {
             if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
                 self.playerState = WLPlayerStatePlaying;
+                if (!self.panGesture) {
+                    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesture:)];
+                    panGesture.delegate = self;
+                    panGesture.maximumNumberOfTouches = 1;
+                    [panGesture setDelaysTouchesBegan:YES];
+                    [panGesture setDelaysTouchesEnded:YES];
+                    [self addGestureRecognizer:panGesture];
+                    self.panGesture = panGesture;
+                }
             }else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
                 self.playerState = WLPlayerStateFailed;
             }
