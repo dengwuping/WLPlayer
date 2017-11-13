@@ -10,6 +10,7 @@
 #import "WLTopControlView.h"
 #import "WLBottomControlView.h"
 #import "WLPlayerHeader.h"
+#import "WLSkipView.h"
 
 @interface WLPlayerControlView ()<WLTopControlViewDelegate,WLBottomControlViewDelegate>
 //顶部视图
@@ -18,6 +19,8 @@
 @property (nonatomic,strong) WLBottomControlView *bottomControl;
 //标识是否显示控制视图
 @property (nonatomic,assign) BOOL showingPlayerControl;
+//快进/快退
+@property (nonatomic,strong) WLSkipView *skipView;
 @end
 
 @implementation WLPlayerControlView
@@ -42,11 +45,17 @@
         make.left.and.right.and.bottom.equalTo(self);
         make.height.equalTo(@50);
     }];
+    [self.skipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.width.equalTo(@125);
+        make.height.equalTo(@80);
+    }];
 }
 //添加通知
 - (void)addNotificationToSelf {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(singleNotificationAction) name:wl_singleTapGestureNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCurrentPlayTime:) name:wl_getCurrentPlayTimeNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(skipPlayTime:) name:wl_skipPlayTimeNotificationName object:nil];
 }
 //设置代理事件
 - (void)setupDelegateAction {
@@ -86,7 +95,17 @@
     CGFloat value = (CGFloat)[videoData[@"value"] floatValue];
     //更新时间和进度条
     [self.bottomControl updateCurrenTime:currentTime totalTime:totalTime progress:value];
-    
+}
+- (void)skipPlayTime:(NSNotification *)notify {
+    NSDictionary *videoData = notify.userInfo;
+    NSInteger currentTime = [videoData[@"currentTime"] integerValue];
+    long totalTime = [videoData[@"totalTime"] longValue];
+    CGFloat value = (CGFloat)[videoData[@"value"] floatValue];
+    BOOL forward = [videoData[@"forward"] boolValue];
+    //更新时间和进度条
+    [self.bottomControl updateCurrenTime:currentTime totalTime:totalTime progress:value];
+    [self showPlayerControl];
+    [self.skipView.skipSubject sendNext:@{@"forward":@(forward),@"fastTime":@(currentTime),@"totalTime":@(totalTime)}];
 }
 //显示控制视图
 - (void)showPlayerControl {
@@ -132,5 +151,13 @@
         [self addSubview:_bottomControl];
     }
     return _bottomControl;
+}
+-(WLSkipView *)skipView{
+    if (!_skipView){
+        _skipView = [[WLSkipView alloc] init];
+        _skipView.hidden = YES;
+        [self addSubview:_skipView];
+    }
+    return _skipView;
 }
 @end

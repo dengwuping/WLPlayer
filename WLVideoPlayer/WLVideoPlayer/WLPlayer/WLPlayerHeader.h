@@ -27,5 +27,7 @@
 #define wl_endedDraggingSliderNotificationName @"EndedDraggingSliderNotification"
 //是否开启强制横屏模式
 #define wl_openLandscapeNotificationName @"OpenLandscapeNotification"
+//快进操作
+#define wl_skipPlayTimeNotificationName @"SkipPlayTimeNotification"
 
 #define wl_navigationBarHeight [UIScreen mainScreen].bounds.size.height == 812 ? 88 : 64

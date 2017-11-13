@@ -35,7 +35,7 @@
     }];
     [self setupDelegateAction];
     [self.playerView autoPlayTheVideo];
-    if (self.navigationController) {//如果是push过来的，先进行横屏设置
+    if (self.navigationController && self.playerView.openLandscape) {//如果是push过来的，先进行横屏设置
         [self makeLandscapeWithPush];
     }
 }
@@ -86,7 +86,7 @@
     return UIInterfaceOrientationLandscapeRight;
 }
 - (BOOL)prefersStatusBarHidden {
-    return NO;
+    return YES;
 }
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;

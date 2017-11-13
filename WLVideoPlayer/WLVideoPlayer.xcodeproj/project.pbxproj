@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		331195E11FB959BC00A664B5 /* WLSkipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331195E01FB959BC00A664B5 /* WLSkipView.m */; };
 		33710EA71FAC5F4100ED35C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EA61FAC5F4100ED35C2 /* AppDelegate.m */; };
 		33710EAA1FAC5F4100ED35C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EA91FAC5F4100ED35C2 /* ViewController.m */; };
 		33710EAD1FAC5F4200ED35C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33710EAB1FAC5F4200ED35C2 /* Main.storyboard */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		331195DF1FB959BC00A664B5 /* WLSkipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLSkipView.h; sourceTree = "<group>"; };
+		331195E01FB959BC00A664B5 /* WLSkipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLSkipView.m; sourceTree = "<group>"; };
 		33710EA21FAC5F4100ED35C2 /* WLVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WLVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33710EA51FAC5F4100ED35C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33710EA61FAC5F4100ED35C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				33C6747C1FB93357006E86F9 /* UINavigationController+WLOrientation.m */,
 				33C6747E1FB9341A006E86F9 /* UITabBarController+WLOrientation.h */,
 				33C6747F1FB9341A006E86F9 /* UITabBarController+WLOrientation.m */,
+				331195DF1FB959BC00A664B5 /* WLSkipView.h */,
+				331195E01FB959BC00A664B5 /* WLSkipView.m */,
 			);
 			path = WLPlayer;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				33710EA71FAC5F4100ED35C2 /* AppDelegate.m in Sources */,
 				33C674771FB6A1B9006E86F9 /* WLBaseController.m in Sources */,
 				33C674801FB9341A006E86F9 /* UITabBarController+WLOrientation.m in Sources */,
+				331195E11FB959BC00A664B5 /* WLSkipView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

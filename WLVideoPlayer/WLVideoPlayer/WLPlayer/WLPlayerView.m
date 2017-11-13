@@ -288,13 +288,16 @@
     if (self.skipTotalTime < 0) {
         self.skipTotalTime = 0;
     }
+    BOOL style = false;
+    if (value > 0) { style = YES; }
+    if (value < 0) { style = NO; }
     if (value == 0) {
         return;
     }
     self.isDragging = YES;
     //改变进度条的值
     CGFloat progressValue = self.skipTotalTime / totalMovieDuration;
-     [[NSNotificationCenter defaultCenter] postNotificationName:wl_getCurrentPlayTimeNotificationName object:self.playerControl userInfo:@{@"currentTime":@(self.skipTotalTime),@"totalTime":@(totalMovieDuration),@"value":@(progressValue)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:wl_skipPlayTimeNotificationName object:self.playerControl userInfo:@{@"currentTime":@(self.skipTotalTime),@"totalTime":@(totalMovieDuration),@"value":@(progressValue),@"forward":@(style)}];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
