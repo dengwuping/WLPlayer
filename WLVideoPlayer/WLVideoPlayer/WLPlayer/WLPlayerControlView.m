@@ -36,7 +36,7 @@
 - (void)makeSubviewsConstraints {
     [self.topControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.and.top.equalTo(self);
-        make.height.equalTo(@50);
+        make.height.equalTo(@(wl_navigationBarHeight));
     }];
     [self.bottomControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.equalTo(self);

@@ -28,3 +28,4 @@
 //是否开启强制横屏模式
 #define wl_openLandscapeNotificationName @"OpenLandscapeNotification"
 
+#define wl_navigationBarHeight [UIScreen mainScreen].bounds.size.height == 812 ? 88 : 64

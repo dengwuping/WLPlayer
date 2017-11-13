@@ -32,7 +32,7 @@
 - (void)makeSubviewsConstraints {
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
-        make.left.equalTo(@20);
+        make.left.equalTo(@10);
         make.width.and.height.equalTo(@30);
     }];
     [self.videoTitle mas_makeConstraints:^(MASConstraintMaker *make) {
