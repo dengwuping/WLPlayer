@@ -29,6 +29,8 @@
 @property (nonatomic,strong) UIPanGestureRecognizer *panGesture;
 //标识是否正在播放
 @property (nonatomic,assign) BOOL isPlaying;//这个是为了双击手势下暂停或者播放视频用
+//用户手动停止播放
+@property (nonatomic,assign) BOOL pauseByUser;
 //标识播放是否结束
 @property (nonatomic,assign) BOOL playVideoEnd;
 //定时器，为了方便更新进度条信息
@@ -118,12 +120,14 @@
 - (void)play {
     [self.player play];
     self.isPlaying = YES;
+    self.pauseByUser = NO;
 }
 //暂停
 - (void)pause {
     [self.player pause];
     self.isPlaying = NO;
     self.playerState = WLPlayerStatePause;
+    self.pauseByUser = YES;
 }
 //跳转到指定时间播放
 - (void)seekToTime:(CGFloat)time {
@@ -268,6 +272,7 @@
             switch (self.panDirection) {
                 case WLPanDirectionHorizontal:
                     //水平移动
+                    self.pauseByUser = NO;
                     [self panGestureMovedToHorizontal:veloctyPoint.x];
                     break;
                     case WLPanDirectionVertical:
@@ -409,11 +414,16 @@
 }
 - (void)appDidEnterBackground {
     self.didEnterBackground = YES;
-    self.isPlaying = self.playerState == WLPlayerStatePlaying;
+    if (self.pauseByUser) {
+        self.isPlaying = NO;
+    }else {
+        self.isPlaying = self.playerState == WLPlayerStatePlaying;
+    }
     if (self.isPlaying) {
         [self.player pause];
     }
     self.playerState = WLPlayerStatePause;
+    self.pauseByUser = NO;
 }
 - (void)appDidEnterForeground {
     if (self.isPlaying) {
