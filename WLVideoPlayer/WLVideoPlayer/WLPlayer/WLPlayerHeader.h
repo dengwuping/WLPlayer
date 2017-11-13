@@ -33,3 +33,4 @@
 #define wl_changeBrightnessNotificationName @"ChangeBrightnessNotification"
 
 #define wl_navigationBarHeight [UIScreen mainScreen].bounds.size.height == 812 ? 88 : 64
+
