@@ -86,7 +86,10 @@
     return UIInterfaceOrientationLandscapeRight;
 }
 - (BOOL)prefersStatusBarHidden {
-    return YES;
+    return NO;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 - (BOOL)shouldAutorotate {
     return NO;

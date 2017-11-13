@@ -18,5 +18,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return  UIStatusBarStyleDefault;
+}
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
 
 @end
