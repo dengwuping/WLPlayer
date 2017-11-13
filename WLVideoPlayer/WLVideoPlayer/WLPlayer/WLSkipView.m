@@ -69,7 +69,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.hidden = NO;
     } completion:^(BOOL finished) {
-        [self performSelector:@selector(hideSkipeView) withObject:self afterDelay:5];
+        [self performSelector:@selector(hideSkipeView) withObject:self afterDelay:3];
     }];
 }
 - (void)hideSkipeView {

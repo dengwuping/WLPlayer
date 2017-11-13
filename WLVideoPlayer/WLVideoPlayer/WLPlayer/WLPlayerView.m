@@ -45,6 +45,8 @@
 @property (nonatomic,assign) BOOL isChangingVolume;
 //声音控制
 @property (nonatomic,strong) UISlider *volumeSlider;
+//是否进入后台
+@property (nonatomic,assign) BOOL didEnterBackground;
 @end
 
 @implementation WLPlayerView
@@ -101,8 +103,7 @@
 }
 //自动播放
 - (void)autoPlayTheVideo {
-    [self.player play];
-    self.isPlaying = YES;
+    [self play];
 }
 //设置播放器
 - (void)setupPlayer {
@@ -122,6 +123,7 @@
 - (void)pause {
     [self.player pause];
     self.isPlaying = NO;
+    self.playerState = WLPlayerStatePause;
 }
 //跳转到指定时间播放
 - (void)seekToTime:(CGFloat)time {
@@ -154,6 +156,8 @@
 - (void)addNotificationToSelf {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(progressSliderValueChanged:) name:wl_draggingSliderNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endDraggingProgressSlider:) name:wl_endedDraggingSliderNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterForeground) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 //添加观察者
 - (void)addTimerObserver {
@@ -401,6 +405,20 @@
         //计算出拖动的当前秒数
         NSInteger dragedSeconds = floorf(total * slider.value);
         [self seekToTime:dragedSeconds];
+    }
+}
+- (void)appDidEnterBackground {
+    self.didEnterBackground = YES;
+    self.isPlaying = self.playerState == WLPlayerStatePlaying;
+    if (self.isPlaying) {
+        [self.player pause];
+    }
+    self.playerState = WLPlayerStatePause;
+}
+- (void)appDidEnterForeground {
+    if (self.isPlaying) {
+        [self play];
+        self.playerState = WLPlayerStatePlaying;
     }
 }
 
