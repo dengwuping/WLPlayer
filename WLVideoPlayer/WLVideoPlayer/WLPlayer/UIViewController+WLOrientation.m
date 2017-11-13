@@ -10,25 +10,26 @@
 
 @implementation UIViewController (WLOrientation)
 - (void)makeLandscapeWithPush {
+//    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
     CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
     self.navigationController.view.transform = CGAffineTransformMakeRotation(M_PI*(90)/180.0);
     self.navigationController.view.bounds = CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
     [UIView commitAnimations];
 }
 - (void)makePortraitWithPush {
+//     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
     CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
     self.navigationController.view.transform = CGAffineTransformIdentity;
     self.navigationController.view.bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    self.navigationController.navigationBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
     [UIView commitAnimations];
 }
 
 - (void)makeLandscapeWithPresent {
+//     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
     CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
@@ -38,6 +39,7 @@
 }
 
 - (void)makePortraitWithPresent {
+//     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait];
     CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
@@ -45,5 +47,24 @@
     self.view.bounds = CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
     [UIView commitAnimations];
 }
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return  UIStatusBarStyleDefault;
+}
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+
 
 @end

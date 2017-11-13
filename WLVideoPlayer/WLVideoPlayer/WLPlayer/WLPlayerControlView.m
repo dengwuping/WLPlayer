@@ -47,7 +47,6 @@
 - (void)addNotificationToSelf {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(singleNotificationAction) name:wl_singleTapGestureNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCurrentPlayTime:) name:wl_getCurrentPlayTimeNotificationName object:nil];
-    [self performSelector:@selector(showPlayerControl) withObject:self afterDelay:3];
 }
 //设置代理事件
 - (void)setupDelegateAction {
@@ -96,7 +95,7 @@
         self.alpha = 1.0;
     } completion:^(BOOL finished) {
         self.showingPlayerControl = YES;
-        [self performSelector:@selector(hidePlayerControl) withObject:self afterDelay:3];
+        [self performSelector:@selector(hidePlayerControl) withObject:self afterDelay:5];
     }];
 }
 //隐藏控制视图

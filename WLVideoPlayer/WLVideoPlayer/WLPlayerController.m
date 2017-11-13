@@ -82,14 +82,12 @@
     return UIInterfaceOrientationMaskLandscapeRight;
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return NO;
-}
-
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationLandscapeRight;
 }
-
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 - (BOOL)shouldAutorotate {
     return NO;
 }

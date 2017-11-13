@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "WLTabBarController.h"
-#import "WLNavigationController.h"
-#import "ViewController.h"
 @interface AppDelegate ()
 
 @end
