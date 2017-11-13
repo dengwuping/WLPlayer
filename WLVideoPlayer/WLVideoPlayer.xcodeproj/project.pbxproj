@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		331195E11FB959BC00A664B5 /* WLSkipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331195E01FB959BC00A664B5 /* WLSkipView.m */; };
+		331195E41FB97C8C00A664B5 /* WLBrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331195E31FB97C8C00A664B5 /* WLBrightnessView.m */; };
 		33710EA71FAC5F4100ED35C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EA61FAC5F4100ED35C2 /* AppDelegate.m */; };
 		33710EAA1FAC5F4100ED35C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EA91FAC5F4100ED35C2 /* ViewController.m */; };
 		33710EAD1FAC5F4200ED35C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33710EAB1FAC5F4200ED35C2 /* Main.storyboard */; };
@@ -32,6 +33,8 @@
 /* Begin PBXFileReference section */
 		331195DF1FB959BC00A664B5 /* WLSkipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLSkipView.h; sourceTree = "<group>"; };
 		331195E01FB959BC00A664B5 /* WLSkipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLSkipView.m; sourceTree = "<group>"; };
+		331195E21FB97C8C00A664B5 /* WLBrightnessView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLBrightnessView.h; sourceTree = "<group>"; };
+		331195E31FB97C8C00A664B5 /* WLBrightnessView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WLBrightnessView.m; sourceTree = "<group>"; };
 		33710EA21FAC5F4100ED35C2 /* WLVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WLVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33710EA51FAC5F4100ED35C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33710EA61FAC5F4100ED35C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				33C6747F1FB9341A006E86F9 /* UITabBarController+WLOrientation.m */,
 				331195DF1FB959BC00A664B5 /* WLSkipView.h */,
 				331195E01FB959BC00A664B5 /* WLSkipView.m */,
+				331195E21FB97C8C00A664B5 /* WLBrightnessView.h */,
+				331195E31FB97C8C00A664B5 /* WLBrightnessView.m */,
 			);
 			path = WLPlayer;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				33C6745F1FB445AE006E86F9 /* WLTopControlView.m in Sources */,
 				33C674681FB58262006E86F9 /* WLNavigationController.m in Sources */,
 				33C6746E1FB58605006E86F9 /* WLPlayerController.m in Sources */,
+				331195E41FB97C8C00A664B5 /* WLBrightnessView.m in Sources */,
 				33C6747A1FB6AD5F006E86F9 /* UIViewController+WLOrientation.m in Sources */,
 				33C6747D1FB93357006E86F9 /* UINavigationController+WLOrientation.m in Sources */,
 				33710EAA1FAC5F4100ED35C2 /* ViewController.m in Sources */,

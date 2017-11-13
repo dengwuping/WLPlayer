@@ -8,6 +8,7 @@
 
 #import "WLPlayerView.h"
 #import "WLPlayerControlView.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface WLPlayerView ()<WLPlayerControlViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) AVURLAsset *urlAsset;
@@ -39,6 +40,10 @@
 @property (nonatomic,assign) WLPanDirection panDirection;
 //标识是否正在屏幕上滑动
 @property (nonatomic,assign) BOOL isDragging;
+//标识是否是在调节音量
+@property (nonatomic,assign) BOOL isChangingVolume;
+//声音控制
+@property (nonatomic,strong) UISlider *volumeSlider;
 @end
 
 @implementation WLPlayerView
@@ -161,6 +166,18 @@
         }
     }];
 }
+#pragma mark - 获取系统音量
+- (void)getSystemVolume {
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    self.volumeSlider = nil;
+    for (UIView *view in [volumeView subviews]) {
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            self.volumeSlider = (UISlider *)view;
+            break;
+        }
+    }
+}
+
 #pragma mark - 设置代理响应事件
 - (void)setupDelegateResponser {
     @weakify(self);
@@ -228,10 +245,10 @@
                 self.panDirection = WLPanDirectionVertical;
                 if (locationPoint.x > self.bounds.size.width * 0.5) {
                     //右半屏控制声音
-                    
+                    self.isChangingVolume = YES;
                 }else {
                     //左半屏控制亮度
-                    
+                    self.isChangingVolume = NO;
                 }
             }
         }
@@ -264,7 +281,7 @@
                     case WLPanDirectionVertical:
                 {
                     //垂直移动
-                    
+                    [self panGestureMovedToVertical:veloctyPoint.y];
                 }
                     break;
                 default:
@@ -298,6 +315,10 @@
     //改变进度条的值
     CGFloat progressValue = self.skipTotalTime / totalMovieDuration;
     [[NSNotificationCenter defaultCenter] postNotificationName:wl_skipPlayTimeNotificationName object:self.playerControl userInfo:@{@"currentTime":@(self.skipTotalTime),@"totalTime":@(totalMovieDuration),@"value":@(progressValue),@"forward":@(style)}];
+}
+//竖直移动
+- (void)panGestureMovedToVertical:(CGFloat)value {
+    self.isChangingVolume ? (self.volumeSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 10000);
 }
 
 #pragma mark - UIGestureRecognizerDelegate
