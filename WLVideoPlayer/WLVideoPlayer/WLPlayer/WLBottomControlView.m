@@ -55,12 +55,12 @@
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.left.equalTo(self.playPauseBtn.mas_right).offset(10);
-        make.width.equalTo(@40);
+//        make.width.equalTo(@60);
     }];
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.fullScreenBtn.mas_left).offset(-10);
-        make.width.equalTo(@40);
+//        make.width.equalTo(@60);
     }];
     [self.cacheProgress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);

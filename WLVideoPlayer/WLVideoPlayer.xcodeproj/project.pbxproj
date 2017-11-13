@@ -11,9 +11,7 @@
 		331195E41FB97C8C00A664B5 /* WLBrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331195E31FB97C8C00A664B5 /* WLBrightnessView.m */; };
 		33710EA71FAC5F4100ED35C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EA61FAC5F4100ED35C2 /* AppDelegate.m */; };
 		33710EAA1FAC5F4100ED35C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EA91FAC5F4100ED35C2 /* ViewController.m */; };
-		33710EAD1FAC5F4200ED35C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33710EAB1FAC5F4200ED35C2 /* Main.storyboard */; };
 		33710EAF1FAC5F4200ED35C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33710EAE1FAC5F4200ED35C2 /* Assets.xcassets */; };
-		33710EB21FAC5F4200ED35C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33710EB01FAC5F4200ED35C2 /* LaunchScreen.storyboard */; };
 		33710EB51FAC5F4200ED35C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33710EB41FAC5F4200ED35C2 /* main.m */; };
 		33C674571FB43DEE006E86F9 /* WLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C674561FB43DEE006E86F9 /* WLPlayerView.m */; };
 		33C674591FB44168006E86F9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C674581FB44159006E86F9 /* MediaPlayer.framework */; };
@@ -40,9 +38,7 @@
 		33710EA61FAC5F4100ED35C2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		33710EA81FAC5F4100ED35C2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		33710EA91FAC5F4100ED35C2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		33710EAC1FAC5F4200ED35C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33710EAE1FAC5F4200ED35C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		33710EB11FAC5F4200ED35C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		33710EB31FAC5F4200ED35C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33710EB41FAC5F4200ED35C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33710EC51FAC614900ED35C2 /* WLPlayerHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLPlayerHeader.h; sourceTree = "<group>"; };
@@ -137,9 +133,7 @@
 				33C6746D1FB58605006E86F9 /* WLPlayerController.m */,
 				33C674751FB6A1B9006E86F9 /* WLBaseController.h */,
 				33C674761FB6A1B9006E86F9 /* WLBaseController.m */,
-				33710EAB1FAC5F4200ED35C2 /* Main.storyboard */,
 				33710EAE1FAC5F4200ED35C2 /* Assets.xcassets */,
-				33710EB01FAC5F4200ED35C2 /* LaunchScreen.storyboard */,
 				33710EB31FAC5F4200ED35C2 /* Info.plist */,
 				33710EB41FAC5F4200ED35C2 /* main.m */,
 				33C674661FB58262006E86F9 /* WLNavigationController.h */,
@@ -237,9 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33710EB21FAC5F4200ED35C2 /* LaunchScreen.storyboard in Resources */,
 				33710EAF1FAC5F4200ED35C2 /* Assets.xcassets in Resources */,
-				33710EAD1FAC5F4200ED35C2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,25 +313,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		33710EAB1FAC5F4200ED35C2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				33710EAC1FAC5F4200ED35C2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		33710EB01FAC5F4200ED35C2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				33710EB11FAC5F4200ED35C2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		33710EB61FAC5F4200ED35C2 /* Debug */ = {
@@ -454,6 +427,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YKBW8AGZ9Y;
 				INFOPLIST_FILE = WLVideoPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.liwei.WLVideoPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -469,6 +443,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YKBW8AGZ9Y;
 				INFOPLIST_FILE = WLVideoPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.liwei.WLVideoPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
