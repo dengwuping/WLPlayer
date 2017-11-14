@@ -41,6 +41,10 @@ typedef enum : NSUInteger {
 @property (nonatomic,assign) WLPlayerState playerState;
 //是否强制横屏
 @property (nonatomic,assign) BOOL openLandscape;
+//记录原本的父视图
+@property (nonatomic,weak) UIView *playerFatherView;
+//记录原本父视图的尺寸
+@property (nonatomic,assign) CGSize fatherSize;
 - (void)autoPlayTheVideo;
 
 - (instancetype)initWithURL:(NSURL *)videoURL;

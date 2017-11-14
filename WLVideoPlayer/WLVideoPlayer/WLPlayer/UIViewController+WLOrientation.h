@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+//横屏
+#define wl_makeScreenToLandscapeNotificationName @"MakeScreenToLandScape"
+//竖屏
+#define wl_makeScreenToPortraitNotificationName @"MakeScreenToPortrait"
 
 @interface UIViewController (WLOrientation)
-- (void)makeLandscapeWithPush;
-- (void)makePortraitWithPush;
-- (void)makePortraitWithPresent;
-- (void)makeLandscapeWithPresent;
+- (void)makeScreenToLandscape;
+- (void)makeScreenToPortrait;
 @end

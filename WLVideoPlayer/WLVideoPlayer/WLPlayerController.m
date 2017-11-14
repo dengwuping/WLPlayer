@@ -12,6 +12,7 @@
 @interface WLPlayerController ()<WLPlayerViewDelegate>
 //播放视图
 @property (nonatomic,strong) WLPlayerView *playerView;
+@property (nonatomic,strong) UIView *playerFatherView;
 @end
 
 @implementation WLPlayerController
@@ -30,13 +31,18 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.playerFatherView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.top.equalTo(@(wl_navigationBarHeight));
+        make.height.equalTo(@(self.view.bounds.size.width * 9 / 16));
+    }];
     [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.playerFatherView);
     }];
     [self setupDelegateAction];
     [self.playerView autoPlayTheVideo];
-    if (self.navigationController && self.playerView.openLandscape) {//如果是push过来的，先进行横屏设置
-        [self makeLandscapeWithPush];
+    if (self.playerView.openLandscape) {
+        [self makeScreenToLandscape];
     }
 }
 
@@ -46,7 +52,7 @@
     [[self rac_signalForSelector:@selector(wl_playerView:triggerBackAction:) fromProtocol:@protocol(WLPlayerViewDelegate)] subscribeNext:^(id x) {
         @strongify(self);
         if (self.navigationController) {
-            [self makePortraitWithPush];
+            [self makeScreenToPortrait];
             [self.navigationController popViewControllerAnimated:YES];
         }else {
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -59,17 +65,9 @@
         @strongify(self);
         BOOL fullScreen = [tuple.last boolValue];
         if (fullScreen) {
-            if (self.navigationController) {
-                [self makeLandscapeWithPush];
-            }else {
-                [self makeLandscapeWithPresent];
-            }
+            [self makeScreenToLandscape];
         }else {
-            if (self.navigationController) {
-                [self makePortraitWithPush];
-            }else {
-                [self makePortraitWithPresent];
-            }
+            [self makeScreenToPortrait];
         }
     }];
     [[self rac_signalForSelector:@selector(wl_playerView:triggerPlayAction:) fromProtocol:@protocol(WLPlayerViewDelegate)] subscribeNext:^(RACTuple *tuple) {
@@ -96,6 +94,7 @@
 }
 
 - (void)dealloc {
+    NSLog(@"我释放了");
     self.playerView.playerViewDelegate = nil;
 }
 
@@ -103,9 +102,18 @@
     if (!_playerView){
         _playerView = [[WLPlayerView alloc] initWithURL:[NSURL URLWithString:@"http://baobab.wdjcdn.com/1456117847747a_x264.mp4"]];
         _playerView.playerViewDelegate = self;
-        _playerView.openLandscape = YES;
-        [self.view addSubview:_playerView];
+        _playerView.openLandscape = !self.navigationController;
+        _playerView.playerFatherView = self.playerFatherView;
+        _playerView.fatherSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width * 9 / 16);
+        [self.playerFatherView addSubview:_playerView];
     }
     return _playerView;
+}
+-(UIView *)playerFatherView{
+    if (!_playerFatherView){
+        _playerFatherView = [[UIView alloc] init];
+        [self.view addSubview:_playerFatherView];
+    }
+    return _playerFatherView;
 }
 @end

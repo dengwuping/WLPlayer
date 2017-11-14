@@ -9,43 +9,35 @@
 #import "UIViewController+WLOrientation.h"
 
 @implementation UIViewController (WLOrientation)
-- (void)makeLandscapeWithPush {
+- (void)makeScreenToLandscape {
     [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
     CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
-    self.navigationController.view.transform = CGAffineTransformMakeRotation(M_PI*(90)/180.0);
-    self.navigationController.view.frame = CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+    if (self.navigationController) {
+        self.view.transform = CGAffineTransformMakeRotation(M_PI*(90)/180.0);
+        self.view.frame = CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+    }else {
+        self.view.transform = CGAffineTransformIdentity;
+        self.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    }
     [UIView commitAnimations];
+    [[NSNotificationCenter defaultCenter] postNotificationName:wl_makeScreenToLandscapeNotificationName object:nil];
 }
-- (void)makePortraitWithPush {
+- (void)makeScreenToPortrait {
     [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
     CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:duration];
-    self.navigationController.view.transform = CGAffineTransformIdentity;
-    self.navigationController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    if (self.navigationController) {
+        self.view.transform = CGAffineTransformIdentity;
+        self.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    }else {
+        self.view.transform = CGAffineTransformMakeRotation(-M_PI*(90)/180.0);
+        self.view.frame = CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+    }
     [UIView commitAnimations];
-}
-
-- (void)makeLandscapeWithPresent {
-    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
-    CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:duration];
-    self.view.transform = CGAffineTransformIdentity;
-    self.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    [UIView commitAnimations];
-}
-
-- (void)makePortraitWithPresent {
-    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
-    CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:duration];
-    self.view.transform = CGAffineTransformMakeRotation(-M_PI*(90)/180.0);
-    self.view.frame = CGRectMake(0, 0,  [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-    [UIView commitAnimations];
+    [[NSNotificationCenter defaultCenter] postNotificationName:wl_makeScreenToPortraitNotificationName object:nil];
 }
 
 

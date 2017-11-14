@@ -86,7 +86,6 @@
 - (void)setOpenLandscape:(BOOL)openLandscape {
     _openLandscape = openLandscape;
     [[NSNotificationCenter defaultCenter] postNotificationName:wl_openLandscapeNotificationName object:nil userInfo:@{@"landscape":@(openLandscape)}];
-    
 }
 //设置播放的item
 - (void)setPlayerItem:(AVPlayerItem *)playerItem {
@@ -162,6 +161,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endDraggingProgressSlider:) name:wl_endedDraggingSliderNotificationName object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterForeground) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeScreenToPortrait) name:wl_makeScreenToPortraitNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(makeScreenToLandscape) name:wl_makeScreenToLandscapeNotificationName object:nil];
 }
 //添加观察者
 - (void)addTimerObserver {
@@ -430,6 +431,19 @@
         [self play];
         self.playerState = WLPlayerStatePlaying;
     }
+}
+- (void)makeScreenToPortrait{
+    [self.playerFatherView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.playerFatherView.superview);
+        make.left.and.right.equalTo(self.playerFatherView.superview);
+        make.top.equalTo(self.playerFatherView.superview).offset(wl_navigationBarHeight);
+        make.height.equalTo(@(self.fatherSize.height));
+    }];
+}
+- (void)makeScreenToLandscape {
+    [self.playerFatherView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.playerFatherView.superview);
+    }];
 }
 
 - (void)dealloc {

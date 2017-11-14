@@ -110,22 +110,34 @@
 }
 //显示控制视图
 - (void)showPlayerControl {
-    [self playerCancelAutoFadeOutControlView];
-    [UIView animateWithDuration:0.2 animations:^{
-        self.alpha = 1.0;
-    } completion:^(BOOL finished) {
-        self.showingPlayerControl = YES;
-        [self performSelector:@selector(hidePlayerControl) withObject:self afterDelay:5];
-    }];
+    if (self) {
+        [self playerCancelAutoFadeOutControlView];
+        [UIView animateWithDuration:0.2 animations:^{
+            if (self) {
+                self.alpha = 1.0;
+            }
+        } completion:^(BOOL finished) {
+            if (self) {
+                self.showingPlayerControl = YES;
+                [self performSelector:@selector(hidePlayerControl) withObject:self afterDelay:5];
+            }
+        }];
+    }
 }
 //隐藏控制视图
 - (void)hidePlayerControl {
-    [self playerCancelAutoFadeOutControlView];
-    [UIView animateWithDuration:0.2 animations:^{
-        self.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        self.showingPlayerControl = NO;
-    }];
+    if (self) {
+        [self playerCancelAutoFadeOutControlView];
+        [UIView animateWithDuration:0.2 animations:^{
+            if (self) {
+                self.alpha = 0.0;
+            }
+        } completion:^(BOOL finished) {
+            if (self) {
+                self.showingPlayerControl = NO;
+            }
+        }];
+    }
 }
 /**
  *  取消延时隐藏controlView的方法
@@ -135,6 +147,7 @@
 }
 
 - (void)dealloc {
+    [self playerCancelAutoFadeOutControlView];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(WLTopControlView *)topControl{
